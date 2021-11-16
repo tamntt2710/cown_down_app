@@ -2,20 +2,21 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class notiFood extends ChangeNotifier{
+  int maxSecond;
+  int second;
+  notiFood({
+    required this.maxSecond
+  }):second = maxSecond;
 
-
-  static const maxSecond = 180;
-  int seconds = maxSecond;
   Timer? timer;
  void startTimer({bool reset = true}){
-  // int seconds= food.second;
    if(reset){
      resetTimer();
    }
    timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
-    // food.second --;
-     if(seconds > 0) {
-       seconds --;
+     if(second > 0) {
+       second --;
+       print(second);
        notifyListeners();
      }
      else
@@ -25,9 +26,10 @@ class notiFood extends ChangeNotifier{
   }
   void resetTimer(){
    print("Reset time");
-   seconds = maxSecond;
+   second = maxSecond;
    notifyListeners();
  }
+
   void stopTimer({reset = true}) {
     if (reset) {
       print("Reset after stop");
